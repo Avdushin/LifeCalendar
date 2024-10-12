@@ -1,0 +1,34 @@
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
+  gap: 5px;
+}
+
+.year {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.week {
+  width: 10px;
+  height: 10px;
+  background-color: #ddd;
+  margin: 1px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.week.filled {
+  background-color: #007bff;
+}
+
+.eventEditor {
+  margin-top: 20px;
+}
+
+.eventEditor input {
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 100%;
+}
