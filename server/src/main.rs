@@ -1,4 +1,4 @@
-use actix_web::{App, HttpServer, web, middleware};
+use actix_web;
 use dotenv::dotenv;
 use sqlx::PgPool;
 use std::env;
@@ -7,6 +7,7 @@ mod auth;
 mod tasks;
 mod events;
 mod routes;
+mod server;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -17,13 +18,5 @@ async fn main() -> std::io::Result<()> {
 
     println!("Server run at the {server_address}");
 
-    HttpServer::new(move || {
-        App::new()
-            .app_data(web::Data::new(pool.clone()))
-            .wrap(middleware::Logger::default()) 
-            .configure(routes::config_routes)
-    })
-    .bind(&server_address)?
-    .run()
-    .await
+    server::run_server(pool, &server_address).await
 }
